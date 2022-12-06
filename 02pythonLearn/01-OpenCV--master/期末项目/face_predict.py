@@ -87,5 +87,5 @@ for time in go_out_time:
 print("是否将该人物视频提取出来？")
 get_frame = int(input("是 输入 1，否 输入 0 ："))
 if(get_frame == 1):
-    clip_video('./video/zm.mp4','./video/1.avi',img_time)
+    clip_video('./video/01.mp4','./video/1.avi',img_time)
     print("视频zm1.avi保存完成")

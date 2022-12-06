@@ -6,6 +6,9 @@ import glob
 img_path = '.\\videoimage\\'  # 带处理的图片存放的根目录
 face_path = '.\\video_face_imge\\'  # 处理后得到的人脸存放的路径
 model = './model/haarcascade_frontalface_default.xml'
+#model = './model/face_model_trained.xml'
+
+
 if not os.path.isfile(model):
     print("你缺少人脸检测模型——haarcascade_frontalface_default.xml")
 if not os.path.exists(face_path):

@@ -30,7 +30,7 @@ def video_split(video_path,save_path):
 			cv2.waitKey(1)	#1毫秒后进行下一步
 		c=c+1
 
-DATA_DIR = "./video/zm.mp4" #视频数据主目录
+DATA_DIR = "video/02.mp4"  #视频数据主目录
 SAVE_DIR = "./videoimage" #帧文件保存目录
 if not os.path.exists(SAVE_DIR):
 	os.makedirs(SAVE_DIR)

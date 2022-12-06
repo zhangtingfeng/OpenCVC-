@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import os
 import glob
-
+import shutil
 
 # 切割视频函数
 def clip_video(video_path, save_path, img_time):
@@ -53,6 +53,7 @@ def get_img_file(path):
 
 # 测试图片存放的根路径
 path = './video_face_imge'
+videoimgpath = './videoimage'
 
 imgs_file = get_img_file(path)  # 获取所有带测试的图片路径
 # 创建人脸识别器
@@ -69,9 +70,13 @@ for img in imgs_file:
     # 预测
     [p_label, p_confidence] = model.predict(np.asarray(np.asarray(bb)))
     # 识别出来哪个人，p_label决定选择那个人
-    if (p_label == 1 and p_confidence < 3000):
+    print("p_label%,p_confidence%",p_label,p_confidence)
+    if (p_label == 0 and p_confidence < 3000):
 
-        img = img.split('.')[0].split('_')[0]  # 提取出图片名，确定时间信息
+        img = img.split('.')[0].split('_')[0]  # 提出图片名，确定时间信息
+
+        sourceimg = videoimgpath + '/' + img+".jpg"
+        shutil.copy(sourceimg, './pickitout/' + str(int(p_confidence))+".jpg")
         img_n = int(img)
         img_time.append(img_n // 10)  # 确定时间 精确到0.1秒
         # 判断开始时间和结束时间，如果该人物出现的时差不于2s这里就表明，该人物在这段时间内连续存在
@@ -84,13 +89,14 @@ for img in imgs_file:
             n_ms = 1000
         else:
             n_ms = img_n / 100
-go_out_time.append((start_time, n_ms))
-img_time = set(img_time)
-for time in go_out_time:
-    print("该人物出现时间在%d~%d秒" % (time))
+
+#go_out_time.append((start_time, n_ms))
+#img_time = set(img_time)
+#for time in go_out_time:
+#    print("该人物出现时间在%d~%d秒" % (time))
 # 决定是否提取视频
-print("是否将该人物视频提取出来？")
-get_frame = int(input("是 输入 1，否 输入 0 ："))
-if (get_frame == 1):
-    clip_video('./video/zm.mp4', './videoout/zm.avi', img_time)
-    print("视频zm.avi保存完成")
+#print("是否将该人物视频提取出来？")
+#get_frame = int(input("是 输入 1，否 输入 0 ："))
+#if (get_frame == 1):
+    #    clip_video('video/02.mp4', './videoout/zm.avi', img_time)
+#    print("视频zm.avi保存完成")

@@ -14,7 +14,7 @@ def read_video():
     获取到输入的视频路径，并建立保存的路径。
     :return:
     """
-    video_path = './video/zm.mp4'
+    video_path = 'video/01.mp4'
     save_path = './video/1.avi'
     return video_path, save_path
 
